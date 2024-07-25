@@ -1,0 +1,39 @@
+/* Inbox.css */
+.chat-container {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 15px;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.message-you {
+  background-color: #007bff;
+  color: #fff;
+  text-align: right;
+}
+
+.message-content {
+  display: inline-block;
+}
+
+.list-group-item-action {
+  cursor: pointer;
+}
+
+textarea {
+  resize: none;
+}

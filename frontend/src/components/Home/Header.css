@@ -1,0 +1,19 @@
+/* Custom styles for the dropdown in the header */
+.dropdown-toggle-nav {
+  color: #9c9a9a; /* Adjust text color */
+  background-color: transparent; /* Ensure background is transparent */
+  border: none; /* Remove border */
+}
+
+.dropdown-menu-nav {
+  background-color: #343a40; /* Dark background for the dropdown menu */
+  border: 1px solid #495057; /* Border color */
+}
+
+.dropdown-menu-nav .dropdown-item {
+  color: #fff; /* Text color for dropdown items */
+}
+
+.dropdown-menu-nav .dropdown-item:hover {
+  background-color: #495057; /* Background color on hover */
+}
