@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { Form, Button, ListGroup } from "react-bootstrap";
 import { getAuth } from "firebase/auth";
-import { sendMessage } from "../Inbox/chatService";
+import { useSelector } from "react-redux";
 
 const ChatContainer = ({ contact, messages, onSendMessage }) => {
   const [message, setMessage] = useState("");
-  const auth = getAuth();
-  const currentUserId = auth.currentUser.uid;
+  const user = useSelector((state) => state.auth.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (message.trim() === "") return;
 
-    await onSendMessage(contact.id, message, currentUserId);
+    await onSendMessage(contact.id, message);
     setMessage("");
   };
 
@@ -23,17 +22,15 @@ const ChatContainer = ({ contact, messages, onSendMessage }) => {
         {messages.map((msg, index) => (
           <ListGroup.Item
             key={index}
-            className={
-              msg.senderId === currentUserId ? "text-end" : "text-start"
-            }
+            className={msg.senderId === user.userId ? "text-end" : "text-start"}
             style={{
               backgroundColor:
-                msg.senderId === currentUserId ? "#d1e7dd" : "#f8f9fa",
+                msg.senderId === user.userId ? "#d1e7dd" : "#f8f9fa",
               borderRadius: "10px",
               margin: "5px 0",
               maxWidth: "70%",
               alignSelf:
-                msg.senderId === currentUserId ? "flex-end" : "flex-start",
+                msg.senderId === user.userId ? "flex-end" : "flex-start",
             }}
           >
             {msg.message}

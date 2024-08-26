@@ -1,6 +1,26 @@
 import { auth, firestore } from "./firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+
+// Function to generate a random user ID with 1 to 4 digits
+const generateUserId = async () => {
+  const maxAttempts = 10;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const userId = Math.floor(Math.random() * 10000).toString(); // Generate a number between 0 and 9999
+
+    // Check if the generated userId already exists in Firestore
+    const userQuery = query(
+      collection(firestore, "users"),
+      where("userId", "==", userId)
+    );
+    const querySnapshot = await getDocs(userQuery);
+
+    if (querySnapshot.empty) {
+      return userId; // Return the userId if it's unique
+    }
+  }
+  throw new Error("Failed to generate a unique user ID. Please try again.");
+};
 
 export const registerUser = async (email, password) => {
   try {
@@ -11,9 +31,13 @@ export const registerUser = async (email, password) => {
     );
     const user = userCredential.user;
 
-    // Optionally add user to Firestore
+    // Generate a custom user ID with 1 to 4 digits
+    const userId = await generateUserId();
+
+    // Add user to Firestore with custom userId
     await addDoc(collection(firestore, "users"), {
       uid: user.uid,
+      userId: userId,
       email: user.email,
       createdAt: new Date(),
     });
