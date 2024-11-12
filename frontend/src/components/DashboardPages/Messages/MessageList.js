@@ -8,16 +8,17 @@ function MessageList({
 }) {
   return (
     <div className="message-list">
-      {conversations.map((conv) => (
-        <>
-          <MessageItem
-            key={conv.id}
-            conversation={conv}
-            isSelected={conv.id === selectedConversationId}
-            onSelectConversation={onSelectConversation}
-          />
-        </>
-      ))}
+      {conversations &&
+        conversations.map((conv) => (
+          <>
+            <MessageItem
+              key={conv.id}
+              conversation={conv}
+              isSelected={conv.id === selectedConversationId}
+              onSelectConversation={onSelectConversation}
+            />
+          </>
+        ))}
     </div>
   );
 }

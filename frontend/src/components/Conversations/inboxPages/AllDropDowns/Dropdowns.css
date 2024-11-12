@@ -1,0 +1,47 @@
+.wc-chat-drops {
+  display: flex !important;
+  flex-wrap: nowrap;
+  gap: 2px;
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 5px;
+}
+
+.wc-chat-drops::-webkit-scrollbar {
+  display: none;
+}
+
+.wc-chat-drop {
+  flex-grow: 1; /* Allow each drop to grow based on its content */
+  display: flex;
+}
+
+.drop-button {
+  flex-grow: 1; /* Button grows to fit content */
+  /* padding: 10px 20px; Adequate padding for better appearance */
+  text-align: center;
+  white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+.drop-button-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Responsive styles for smaller devices */
+@media (max-width: 1024px) {
+  .drop-button {
+    /* padding: 8px 16px; */
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .drop-button {
+    /* padding: 6px 12px; */
+    font-size: 12px;
+  }
+}

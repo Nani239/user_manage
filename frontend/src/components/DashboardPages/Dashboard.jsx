@@ -6,7 +6,6 @@ import { GoArrowSwitch } from "react-icons/go";
 
 const Dashboard = () => {
   const [showSidebar, setShowSidebar] = useState(false);
-
   const handleToggleSidebar = () => setShowSidebar((prev) => !prev);
 
   return (

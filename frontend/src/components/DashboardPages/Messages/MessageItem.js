@@ -12,12 +12,14 @@ function MessageItem({ conversation, isSelected, onSelectConversation }) {
       <hr />
       <div className="avatar">{/* Avatar goes here */}</div>
       <div className="message-info">
-        <div className="name">{conversation.name}</div>
-        <div className="last-message">{conversation.lastMessage}</div>
+        <div className="name">{conversation.name || conversation.email}</div>
+        <div className="last-message">
+          {conversation.lastMessage || "No last message"}
+        </div>
       </div>
-      <div className="message-date">{conversation.date}</div>
+      <div className="message-date">{"11-12-2024"}</div>
       {conversation.unread && (
-        <div className="unread-count">{conversation.unreadCount}</div>
+        <div className="unread-count">{conversation.unreadCount || ""}</div>
       )}
     </div>
   );

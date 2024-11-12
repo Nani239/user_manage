@@ -13,6 +13,7 @@ const ChatContainer = ({ contact, messages, onSendMessage }) => {
 
     await onSendMessage(contact.id, message);
     setMessage("");
+    console.log("Message sent successfully!");
   };
 
   return (

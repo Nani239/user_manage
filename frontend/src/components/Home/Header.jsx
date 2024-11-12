@@ -5,15 +5,33 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../Redux/Slices/AuthSlice";
 import { Dropdown } from "react-bootstrap";
 import "./Header.css"; // Import a custom CSS file for additional styling
+import { collection, getDocs } from "firebase/firestore";
+import { setAllUsers } from "../../Redux/Slices/userSlice";
+import { db } from "../Auth/firebase";
 
 const Header = () => {
   const user = useSelector((state) => state.auth.user);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const dispatch = useDispatch();
-  console.log(user, "user");
   const handleLogout = () => {
     dispatch(logout());
   };
+  const fetchContacts = async () => {
+    const usersCollectionRef = collection(db, "users");
+    const querySnapshot = await getDocs(usersCollectionRef);
+    const users = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      uid: doc.data().uid,
+      email: doc.data().email,
+    }));
+    // setContacts(users);
+    dispatch(setAllUsers(users));
+  };
+  React.useEffect(() => {
+    fetchContacts();
+    // fetchCOnversations();
+  }, []);
 
   return (
     <header className="bg-dark text-white sticky-top">
@@ -36,7 +54,10 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/dashboard/inbox">
+                <Link className="nav-link" to="/dashboard/chat">
+                  Chat
+                </Link>
+                <Link className="nav-link" to="/inbox">
                   Inbox
                 </Link>
               </li>

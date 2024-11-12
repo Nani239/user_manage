@@ -1,0 +1,37 @@
+.message-card {
+  background-color: #ffffff;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 2px;
+  box-shadow: 1px 1px 6px #888888;
+}
+.rce-citem {
+  background-color: rgb(244, 244, 244) !important;
+}
+.chat-head {
+  background-color: #888888;
+}
+.chat-header .modal-title {
+  width: 100% !important;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px; /* Add margin bottom to create space between message header and message text */
+}
+
+.sender-name {
+  font-weight: bold; /* Make sender's name bold if needed */
+  color: #333; /* Adjust color as needed */
+}
+
+/* .message-date {
+  font-size: 12px; 
+  color: #888;
+} */

@@ -5,15 +5,16 @@ import { getMessages, sendMessage, getChatId } from "./chatService"; // Adjust p
 import { getAuth } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Auth/firebase";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setAllUsers } from "../../../Redux/Slices/userSlice";
 
 const Inbox = () => {
-  const user = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.user);
+  const { AllUsers } = useSelector((state) => state.user);
   const [selectedContact, setSelectedContact] = useState(null);
-  const [contacts, setContacts] = useState([]);
   const [conversations, setConversations] = useState({});
   const auth = getAuth();
-  console.log(user, "user");
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchContacts = async () => {
       const usersCollectionRef = collection(db, "users");
@@ -21,10 +22,11 @@ const Inbox = () => {
       const users = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-        userId: doc.data().userId,
-        email: doc.data().email
+        uid: doc.data().uid,
+        email: doc.data().email,
       }));
-      setContacts(users);
+      // setContacts(users);
+      dispatch(setAllUsers(users));
     };
 
     fetchContacts();
@@ -32,8 +34,9 @@ const Inbox = () => {
 
   useEffect(() => {
     if (selectedContact) {
+      console.log(selectedContact, user, "selectedContact");
       const fetchChatIdAndMessages = async () => {
-        const chatId = await getChatId(selectedContact.id, user.userId);
+        const chatId = await getChatId(selectedContact.id, user.uid);
         if (chatId) {
           const unsubscribe = getMessages(chatId, (messages) => {
             setConversations((prevConversations) => ({
@@ -44,7 +47,6 @@ const Inbox = () => {
           return () => unsubscribe();
         }
       };
-
       fetchChatIdAndMessages();
     }
   }, [selectedContact]);
@@ -54,8 +56,9 @@ const Inbox = () => {
   };
 
   const handleSendMessage = async (contactId, message) => {
-    const reciverId = contactId === user.userId ? selectedContact.userId : user.userId;
-    await sendMessage(contactId, user.userId, reciverId, message);
+    const reciverId = contactId === user.uid ? selectedContact.uid : user.uid;
+    await sendMessage(contactId, user.uid, reciverId, message,user);
+    console.log("Message sent successfully!");
   };
 
   return (
@@ -63,7 +66,7 @@ const Inbox = () => {
       <div className="row">
         <div className="col-md-4 col-lg-3">
           <ContactList
-            contacts={contacts}
+            contacts={AllUsers}
             onSelectContact={handleSelectContact}
           />
         </div>

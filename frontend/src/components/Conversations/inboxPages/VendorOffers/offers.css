@@ -1,0 +1,31 @@
+.square-details {
+  border: 1px solid #000; /* Add a border to make the box visible */
+  border-radius: 5px; /* Optional: add rounded corners */
+  padding: 6px; /* Optional: add some padding */
+  background-color: #f8f9fa; /* Optional: add a background color */
+}
+.square-price {
+  border: 1px solid #000; /* Add a border to make the box visible */
+  border-radius: 5px; /* Optional: add rounded corners */
+  padding: 6px; /* Optional: add some padding */
+  background-color: #f8f9fa; /* Optional: add a background color */
+  width: 150px;
+}
+.history-box {
+  border: 1px solid #000;
+  padding: 6px;
+  margin: 10px;
+  border-radius: 2px;
+  width: 97%;
+}
+.status-bubble {
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid #007bff;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+}
+
+.status-bubble p {
+  margin: 0;
+}

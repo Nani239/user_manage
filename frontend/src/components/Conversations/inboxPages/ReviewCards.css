@@ -1,0 +1,21 @@
+.youtube-container {
+  width: 100%; /* full width on small screens */
+}
+.review-card-text {
+  font-size: medium !important;
+  color: #000;
+}
+
+/* medium screens and up */
+@media (min-width: 768px) {
+  .youtube-container {
+    width: 100%; /* 75% width on medium screens */
+  }
+}
+
+/* large screens and up */
+@media (min-width: 1200px) {
+  .youtube-container {
+    width: 50%; /* 50% width on large screens */
+  }
+}

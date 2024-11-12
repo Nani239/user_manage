@@ -1,0 +1,18 @@
+.plus-icon {
+  display: flex;
+  gap: 15px;
+}
+.plus-icon i {
+  font-size: 16px;
+  color: #28a745;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 8px;
+  transition: background-color 0.3s, border-color 0.3s;
+  cursor: pointer;
+  display: flex;
+}
+.plus-icon i:hover {
+  background-color: #e9ecef;
+  border-color: #28a745;
+}
